@@ -1,9 +1,9 @@
 namespace RndTech.Talks.WebApplicatoinFactory.Tests
 {
-	public class UnitTest1
+	public class UnitTest
 	{
 		[Fact]
-		public void Test1()
+		public async Task PingTest()
 		{
 
 		}
