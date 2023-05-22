@@ -1,0 +1,21 @@
+name: Pre-merge branch
+on:
+  pull_request:
+  merge_group:
+jobs:
+  default:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+      - name: Code Style
+        run: git fetch origin main && git diff origin/main --name-only HEAD | dotnet format --verify-no-changes --no-restore --include -
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
