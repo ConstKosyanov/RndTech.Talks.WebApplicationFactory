@@ -1,4 +1,4 @@
-namespace RndTech.Talks.WebApplicatoinFactory.Tests;
+namespace RndTech.Talks.WebApplicationFactory.Tests;
 
 public class UnitTest
 {

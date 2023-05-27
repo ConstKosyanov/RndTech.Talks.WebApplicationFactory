@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace RndTech.Talks.WebApplicatoinFactory;
+namespace RndTech.Talks.WebApplicationFactory;
 
 [ApiController]
 [Route("")]
