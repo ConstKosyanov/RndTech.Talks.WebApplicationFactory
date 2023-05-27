@@ -10,10 +10,17 @@ public class Program
 		var builder = WebApplication.CreateBuilder(args);
 		builder.Services.AddControllers();
 		builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-			.ConfigureContainer<ContainerBuilder>(b => b.RegisterInstance("working"));
+			.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
 
 		var app = builder.Build();
 		app.MapControllers();
 		app.Run();
+	}
+
+	private static void ConfigureContainer(HostBuilderContext context, ContainerBuilder builder)
+	{
+		var pingResponse = context.Configuration.GetValue<string>("ping_response")
+			?? throw new NullReferenceException("ping_response is null");
+		builder.RegisterInstance(pingResponse);
 	}
 }
