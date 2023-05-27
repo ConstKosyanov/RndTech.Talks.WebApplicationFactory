@@ -6,10 +6,15 @@ namespace RndTech.Talks.WebApplicationFactory;
 [Route("")]
 public class HomeController : Controller
 {
-	private readonly string pingResponse;
+	private readonly MyContext myContext;
 
-	public HomeController(string pingResponse) => this.pingResponse = pingResponse;
+	public HomeController(MyContext myContext) => this.myContext = myContext;
 
 	[HttpGet("ping")]
-	public string Ping() => pingResponse;
+	public string Ping()
+	{
+		var entity = myContext.Add(new MyRecord(Guid.NewGuid(), "ping")).Entity;
+		myContext.SaveChanges();
+		return entity.Value;
+	}
 }
